@@ -227,6 +227,7 @@ class Rob extends Module with ZhoushanConfig {
   // difftest for arch event
   if (EnableDifftest) {
     val dt_ae = Module(new DifftestArchEvent)
+    dt_ae.io.exceptionInst  := DontCare
     dt_ae.io.clock        := clock
     dt_ae.io.coreid       := 0.U
     dt_ae.io.intrNO       := RegNext(Mux(intr, intr_mcause, 0.U))

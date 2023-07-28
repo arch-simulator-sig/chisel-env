@@ -52,12 +52,16 @@ class InstPacket extends Bundle {
 
 class InstPacketVec(vec_width: Int) extends Bundle with ZhoushanConfig {
   val vec = Vec(vec_width, Output(new InstPacket))
-  override def cloneType = (new InstPacketVec(vec_width)).asInstanceOf[this.type]
+  //override def cloneType = (new InstPacketVec(vec_width)).asInstanceOf[this.type]
+  //override  def AutocloneType = (new InstPacketVec(vec_width)).asInstanceOf[this.type]
+    //DataMirror.internal.chiselTypeClone(new InstPacketVec(vec_width))
 }
 
 class MicroOpVec(vec_width: Int) extends Bundle {
   val vec = Vec(vec_width, Output(new MicroOp))
-  override def cloneType = (new MicroOpVec(vec_width)).asInstanceOf[this.type]
+  //override def cloneType = (new MicroOpVec(vec_width)).asInstanceOf[this.type]
+  //override def AutocloneType = (new MicroOpVec(vec_width)).asInstanceOf[this.type]
+  //DataMirror.internal.chiselTypeClone(new MicroOpVec(vec_width))
 }
 
 class ExCommitPacket extends Bundle {

@@ -163,6 +163,7 @@ class Core extends Module with ZhoushanConfig {
                  cm_mmio(i)
 
       val dt_ic = Module(new DifftestInstrCommit)
+      dt_ic.io.special  := DontCare
       dt_ic.io.clock    := clock
       dt_ic.io.coreid   := 0.U
       dt_ic.io.index    := i.U

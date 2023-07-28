@@ -12,7 +12,8 @@ test_run_dir/
 build/
 obj_dir/
 logs/
+.coursier/
 
 # DRAMsim3
-dramsim3*.json
-dramsim3.txt
+dramsim3*.*
+./bloop/

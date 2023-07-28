@@ -1,0 +1,16 @@
+
+/mnt/d/verilog/difftest/riscv-tests/build/simple-riscv64-mycpu.elf:     file format elf64-littleriscv
+
+
+Disassembly of section .text:
+
+0000000080000000 <_start>:
+    80000000:	00000513          	li	a0,0
+    80000004:	0400006f          	j	80000044 <halt>
+    80000008:	c0001073          	unimp
+	...
+
+0000000080000044 <halt>:
+    80000044:	00050513          	mv	a0,a0
+    80000048:	0000006b          	0x6b
+    8000004c:	0000006f          	j	8000004c <halt+0x8>

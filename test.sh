@@ -1,8 +1,9 @@
 #!/bin/bash
 
 ysyxid=000000
-cpu_tests_dir=../am-kernels/tests/cpu-tests/build/
-riscv_tests_dir=../riscv-tests/build/
+cpu_tests_dir=./bin/non-output/cpu-tests/
+riscv_tests_dir=./bin/non-output/riscv-tests/
+regression_tests_dir=./bin/custom-output/
 
 function tests {
   bin_files=`eval "find $1 -mindepth 1 -maxdepth 1 -regex \".*\.\(bin\)\""`
@@ -21,18 +22,20 @@ function tests {
   wait
 }
 
-while getopts 'crt:w:ls' OPT; do
+while getopts 'crat:w:ls' OPT; do
   case $OPT in
     c)
       tests $cpu_tests_dir;;
     r)
       tests $riscv_tests_dir;;
+    a)
+      tests $regression_tests_dir;;
     t)
       example="$OPTARG"
-      ./build/emu -i ${cpu_tests_dir}/${example}-riscv64-mycpu.bin;;
+      ./build/emu -i ${cpu_tests_dir}${example}-cpu-tests.bin;;
     w)
       example="$OPTARG"
-      ./build/emu -i ${cpu_tests_dir}/${example}-riscv64-mycpu.bin -b 0 --dump-wave --wave-path=./build/wave.vcd;;
+      ./build/emu -i ${cpu_tests_dir}${example}-cpu-tests.bin -b 0 --dump-wave --wave-path=./build/wave.vcd;;
     l)
       python3 script/lint.py;;
     s)

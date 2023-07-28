@@ -1,0 +1,41 @@
+
+/mnt/d/verilog/difftest/riscv-tests/build/auipc-riscv64-mycpu.elf:     file format elf64-littleriscv
+
+
+Disassembly of section .text:
+
+0000000080000000 <_start>:
+    80000000:	00002517          	auipc	a0,0x2
+    80000004:	71c50513          	addi	a0,a0,1820 # 8000271c <_stack_top+0x171c>
+    80000008:	004005ef          	jal	a1,8000000c <_start+0xc>
+    8000000c:	40b50533          	sub	a0,a0,a1
+    80000010:	000023b7          	lui	t2,0x2
+    80000014:	7103839b          	addiw	t2,t2,1808
+    80000018:	00200193          	li	gp,2
+    8000001c:	02751463          	bne	a0,t2,80000044 <fail>
+
+0000000080000020 <test_3>:
+    80000020:	ffffe517          	auipc	a0,0xffffe
+    80000024:	8fc50513          	addi	a0,a0,-1796 # 7fffd91c <_entry_offset+0x7fffd91c>
+    80000028:	004005ef          	jal	a1,8000002c <test_3+0xc>
+    8000002c:	40b50533          	sub	a0,a0,a1
+    80000030:	ffffe3b7          	lui	t2,0xffffe
+    80000034:	8f03839b          	addiw	t2,t2,-1808
+    80000038:	00300193          	li	gp,3
+    8000003c:	00751463          	bne	a0,t2,80000044 <fail>
+    80000040:	00301663          	bne	zero,gp,8000004c <pass>
+
+0000000080000044 <fail>:
+    80000044:	00100513          	li	a0,1
+    80000048:	0340006f          	j	8000007c <halt>
+
+000000008000004c <pass>:
+    8000004c:	00000513          	li	a0,0
+    80000050:	02c0006f          	j	8000007c <halt>
+    80000054:	c0001073          	unimp
+	...
+
+000000008000007c <halt>:
+    8000007c:	00050513          	mv	a0,a0
+    80000080:	0000006b          	0x6b
+    80000084:	0000006f          	j	80000084 <halt+0x8>
