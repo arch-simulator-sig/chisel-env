@@ -1,0 +1,53 @@
+menu "Memory Configuration"
+
+config MBASE
+  hex "Memory base address"
+  default 0x08048000 if MODE_USER
+  default 0x80000000
+
+config MSIZE
+  hex "Memory size"
+  default 0x8000000
+
+config PADDRBITS
+  int "The number of paddr bits"
+  default 36 if SHARE
+  default 40
+
+config BBL_OFFSET_WITH_CPT
+  hex "The offset of bbl / baremetal app with using gcpt"
+  default 0xa0000
+
+config RESET_FROM_MMIO
+  bool "Reset from mmio address"
+  default n
+
+config PC_RESET_OFFSET
+  hex "Offset of reset vector from the base of memory"
+  default 0 if MODE_USER
+  default 0x100000
+
+config MMIO_RESET_VECTOR
+  hex "MMIO based reset vector"
+  depends on RESET_FROM_MMIO
+  default 0x10000000
+
+config USE_MMAP
+  bool "Allocate guest physical memory with mmap()"
+  default y
+
+config MEM_RANDOM
+  depends on MODE_SYSTEM && !DIFFTEST
+  bool "Initialize the memory with random values"
+  default y
+  help
+    This may help to find undefined behaviors.
+
+config MEM_COMPRESS
+  depends on MODE_SYSTEM && !DIFFTEST
+  bool "Initialize the memory with a compressed gz file"
+  default n
+  help
+    Must have zlib installed.
+
+endmenu #MEMORY

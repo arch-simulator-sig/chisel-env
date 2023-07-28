@@ -17,3 +17,5 @@ logs/
 # DRAMsim3
 dramsim3*.*
 ./bloop/
+
+build/

@@ -1,0 +1,33 @@
+/***************************************************************************************
+* Copyright (c) 2014-2021 Zihao Yu, Nanjing University
+*
+* NEMU is licensed under Mulan PSL v2.
+* You can use this software according to the terms and conditions of the Mulan PSL v2.
+* You may obtain a copy of Mulan PSL v2 at:
+*          http://license.coscl.org.cn/MulanPSL2
+*
+* THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
+* EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
+* MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
+*
+* See the Mulan PSL v2 for more details.
+***************************************************************************************/
+
+#ifndef __RISCV64_H__
+#define __RISCV64_H__
+
+#define ISA_QEMU_BIN "qemu-system-riscv64"
+#define ISA_QEMU_ARGS 
+
+union isa_gdb_regs {
+  struct {
+    uint64_t gpr[32];
+    uint64_t fpr[32];
+    uint64_t pc;
+  };
+  struct {
+    uint32_t array[DIFFTEST_REG_SIZE/sizeof(uint32_t)];
+  };
+};
+
+#endif
