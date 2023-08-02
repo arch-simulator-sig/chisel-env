@@ -19,3 +19,5 @@ dramsim3*.*
 ./bloop/
 
 build/
+*.html
+
