@@ -10,7 +10,7 @@ I'm Li Shi. I graduated from Shanghai Jiao Tong University and obtained the B.S.
 
 ## Project Overview 项目概览
 
-- Project: Zhoushan (https://github.com/OSCPU-Zhoushan/Zhoushan)
+- Project: nanshan (https://github.com/OSCPU-nanshan/nanshan)
 
 - ISA: RISC-V, RV64I
 
@@ -28,9 +28,9 @@ I'm Li Shi. I graduated from Shanghai Jiao Tong University and obtained the B.S.
 
 ![pipeline](pipeline.png)
 
-Zhoushan is a superscalar out-of-order core with 7 pipeline stages, which is divided into frontend and backend. The frontend involves a 2-way instruction fetch unit with a 2-level local branch predictor and an instruction buffer, while the backend includes instruction decode & register renaming, issue units, physical register file, execution units, and a re-order buffer.
+nanshan is a superscalar out-of-order core with 7 pipeline stages, which is divided into frontend and backend. The frontend involves a 2-way instruction fetch unit with a 2-level local branch predictor and an instruction buffer, while the backend includes instruction decode & register renaming, issue units, physical register file, execution units, and a re-order buffer.
 
-Zhoushan是一个7级流水线超标量乱序处理器，可分为前端与后端。前端有两路取指单元、两级局部分支预测器，以及一个指令缓冲。后端有指令解码器、寄存器重命名、发射单元、物理寄存器、执行单元和重排序缓冲。
+nanshan是一个7级流水线超标量乱序处理器，可分为前端与后端。前端有两路取指单元、两级局部分支预测器，以及一个指令缓冲。后端有指令解码器、寄存器重命名、发射单元、物理寄存器、执行单元和重排序缓冲。
 
 ### Instruction Fetch & Branch Prediction 取指与分支预测
 
@@ -64,9 +64,9 @@ We have a 2-way instruction decoder to convert RISC-V instructions into micro-op
 
 指令解码单元可同时解码两条指令，将RISC-V指令转换为微指令 (uops)。解码单元的逻辑由`ESPRESSO`进行优化，这是在Chisel 3.5版本引入的新特性。
 
-In Zhoushan, register renaming is based on the unified physical register file (PRF). In this stage, the processor will first allocate free registers, and update the PRF state table. In the PRF state table, each physical register corresponds to a 4-state FSM, as shown in the following figure (Red path represents for PRF state recovery from branch mis-prediction). Meanwhile, remame table records the mapping relationships between physical registers and architectural registers. Fast mis-prediction recovery is supported as spec table can be recovered from arch table in one clock cycle.
+In nanshan, register renaming is based on the unified physical register file (PRF). In this stage, the processor will first allocate free registers, and update the PRF state table. In the PRF state table, each physical register corresponds to a 4-state FSM, as shown in the following figure (Red path represents for PRF state recovery from branch mis-prediction). Meanwhile, remame table records the mapping relationships between physical registers and architectural registers. Fast mis-prediction recovery is supported as spec table can be recovered from arch table in one clock cycle.
 
-Zhoushan采用统一物理寄存器方式进行寄存器重命名。在这一阶段，处理器首先会分配空闲寄存器，并更新PRF状态表。在PRF状态表中，每一个物理寄存器对应一个4状态的有限状态机 （红色路径表示分支预测错误情况下的PRF状态的恢复路径），如下图所示。同时，重命名表记录了物理寄存器与逻辑寄存器之间的映射关系。spec重命名表可以由arch重命名表在一拍内恢复，即支持分支预测错误后的快速恢复。
+nanshan采用统一物理寄存器方式进行寄存器重命名。在这一阶段，处理器首先会分配空闲寄存器，并更新PRF状态表。在PRF状态表中，每一个物理寄存器对应一个4状态的有限状态机 （红色路径表示分支预测错误情况下的PRF状态的恢复路径），如下图所示。同时，重命名表记录了物理寄存器与逻辑寄存器之间的映射关系。spec重命名表可以由arch重命名表在一拍内恢复，即支持分支预测错误后的快速恢复。
 
 ![prf_state](prf_state.png)
 
@@ -193,13 +193,13 @@ For regular cache access, we implement a 9-state FSM, shown in the following fig
 
 - 实现 [`rcc`](https://github.com/shili2017/rcc) （用C实现rCore）
 
-- Support RV64IMA extension on Zhoushan, add S & U privilege mode, add MMU (implement PTW, TLB...)
+- Support RV64IMA extension on nanshan, add S & U privilege mode, add MMU (implement PTW, TLB...)
 
-- 在Zhoushan上进一步支持RV64IMA指令集扩展，添加S与U特权级，添加内存管理单元（实现PTW、TLB等）
+- 在nanshan上进一步支持RV64IMA指令集扩展，添加S与U特权级，添加内存管理单元（实现PTW、TLB等）
 
-- Transplant Unix-like OS (e.g., rCore, Linux kernel) to Zhoushan core
+- Transplant Unix-like OS (e.g., rCore, Linux kernel) to nanshan core
 
-- 将Unix-like操作系统（如rCore、Linux内核）移植到Zhoushan上
+- 将Unix-like操作系统（如rCore、Linux内核）移植到nanshan上
 
 ## Reference & Dependency 参考设计与依赖项目
 
@@ -215,9 +215,9 @@ For regular cache access, we implement a 9-state FSM, shown in the following fig
 
 - 循环队列的设计部分参考了[香山](https://github.com/OpenXiangShan/XiangShan)
 
-- Zhoushan core depends on other open-source projects or software, including
+- nanshan core depends on other open-source projects or software, including
 
-- Zhoushan依赖于其他开源项目或软件，包括
+- nanshan依赖于其他开源项目或软件，包括
 
   - [Verilator](https://verilator.org)
 

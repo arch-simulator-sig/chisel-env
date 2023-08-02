@@ -28,7 +28,7 @@ object difftest extends SbtModule with CommonModule {
   override def ivyDeps = super.ivyDeps() ++ Agg(ivys.chisel3)
 }
 
-object Zhoushan extends SbtModule with CommonModule {
+object nanshan extends SbtModule with CommonModule {
   override def millSourcePath = os.pwd
   override def ivyDeps = super.ivyDeps() ++ Agg(ivys.chisel3)
   override def moduleDeps = super.moduleDeps ++ Seq(

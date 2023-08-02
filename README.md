@@ -1,12 +1,12 @@
-# Zhoushan Core
+# nanshan Core
 
 Open Source Chip Project by University (OSCPU)
 
-Zhoushan is a 2-way superscalar out-of-order core, compatible with RV64I ISA.
+nanshan is a 2-way superscalar out-of-order core, compatible with RV64I ISA.
 
 Main developer: Li Shi (SJTU/CMU ECE)
 
-## Zhoushan in 2022
+## nanshan in 2022
 
 I plan to relaunch this project in 2022 summer or fall, and the future works include
 
@@ -28,7 +28,7 @@ If you are interested to join, feel free to contact me (lishi@andrew.cmu.edu).
 
 ## Dependency
 
-1. [AM](https://github.com/OSCPU-Zhoushan/abstract-machine), branch: zhoushan
+1. [AM](https://github.com/OSCPU-nanshan/abstract-machine), branch: nanshan
 
 1. [AM-Kernels](https://github.com/NJU-ProjectN/am-kernels), branch: master
 
@@ -41,10 +41,10 @@ If you are interested to join, feel free to contact me (lishi@andrew.cmu.edu).
 First, download all the dependency repositories and set the environment variables as follows.
 
 ```bash
-export NOOP_HOME=<...>/Zhoushan
+export NOOP_HOME=<...>/nanshan
 export NEMU_HOME=<...>/NEMU
 export AM_HOME=<...>/abstract-machine
-export DRAMSIM3_HOME=<...>/Zhoushan/DRAMsim3
+export DRAMSIM3_HOME=<...>/nanshan/DRAMsim3
 ```
 
 Then, config and make `NEMU` and `DRAMsim3`, and install `ESPRESSO`.
@@ -73,7 +73,7 @@ To run functional tests:
 
 ### Bus ID Convention
 
-1. Bus ID is set in `ZhoushanConfig`.
+1. Bus ID is set in `nanshanConfig`.
 
 1. Bus ID must start from 1, and should not skip any index. Bus ID must match the order of `CrossbarNto1`.
 
@@ -96,9 +96,9 @@ class SimTop extends Module {
   ...
 }
 
-// ZhoushanConfig.scala
+// nanshanConfig.scala
 
-trait ZhoushanConfig {
+trait nanshanConfig {
   // MMIO Address Map
   val ClintAddrBase = 0x02000000
   ...
