@@ -1,9 +1,9 @@
 [submodule "difftest"]
 	path = difftest
-	url = https://github.com/OpenXiangShan/difftest.git
+	url = https://gitee.com/OpenXiangShan/difftest.git
 [submodule "DRAMsim3"]
 	path = DRAMsim3
-	url = https://github.com/OpenXiangShan/DRAMsim3.git
+	url = https://gitee.com/dzw1208/DRAMsim3
 # [submodule "NEMU"]
 # 	path = nemu
 # 	url = https://gitee.com/dzw1208/NEMU-1.git

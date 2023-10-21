@@ -41,10 +41,10 @@ If you are interested to join, feel free to contact me (lishi@andrew.cmu.edu).
 First, download all the dependency repositories and set the environment variables as follows.
 
 ```bash
-export NOOP_HOME=<...>/nanshan
-export NEMU_HOME=<...>/NEMU
-export AM_HOME=<...>/abstract-machine
-export DRAMSIM3_HOME=<...>/nanshan/DRAMsim3
+export NOOP_HOME=/home/dzw/chisel-env
+export NEMU_HOME=/home/dzw/chisel-env/nemu
+export AM_HOME=/home/dzw/chisel-env/abstract-machine
+export DRAMSIM3_HOME=/home/dzw/chisel-env/DRAMsim3
 ```
 
 Then, config and make `NEMU` and `DRAMsim3`, and install `ESPRESSO`.
