@@ -17,7 +17,26 @@ export AM_HOME= ...
 export DRAMSIM3_HOME= ...
 ```
 
-Then, config and make `NEMU` and `DRAMsim3`, remember read DRAMsim3 README, and install `ESPRESSO`.
+Then, config and make `NEMU`  
+```
+cd $NEMU_HOME
+make riscv64-xs-ref_defconfig
+make
+```
+config `DRAMsim3`, remember read DRAMsim3 README
+```
+mkdir build
+cd build
+
+# cmake out of source build
+# if co-simulation
+cmake -D COSIM=1 ..
+
+# Build dramsim3 library and executables
+make -j8
+```
+
+and install `ESPRESSO`.
 
 To run first test:
 
@@ -25,6 +44,8 @@ To run first test:
 make emu
 bash test.sh -t add
 ```
+
+how to acclerate chisel , refer https://xiangshan-doc.readthedocs.io/zh-cn/latest/tools/compile-and-sim/
 
 
 ### Git Convention
