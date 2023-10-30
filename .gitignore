@@ -15,11 +15,13 @@ logs/
 .coursier/
 
 # DRAMsim3
-DRAMsim3/
 ./bloop/
-
-build/
 *.html
+.vscode/
 
-./difftest/
+dramsim3*.*
+
+out/
+
+
 

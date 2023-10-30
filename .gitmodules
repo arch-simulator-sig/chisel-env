@@ -7,3 +7,6 @@
 [submodule "NEMU"] 
 	path = nemu
  	url = https://gitee.com/dzw1208/NEMU-1.git
+[submodule "espresso"]
+	path = espresso
+	url = git@github.com:classabbyamp/espresso-logic.git

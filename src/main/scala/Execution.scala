@@ -2,21 +2,27 @@ package nanshan
 
 import chisel3._
 import chisel3.util._
-import nanshan.Constant._
 
 class Execution extends Module {
   val io = IO(new Bundle {
-    val uop = Input(new MicroOp())
-    val rs1_data = Input(UInt(64.W))
-    val rs2_data = Input(UInt(64.W))
+    val opcode = Input(UInt(8.W))
+    val in1 = Input(UInt(64.W))
+    val in2 = Input(UInt(64.W))
     val out = Output(UInt(64.W))
-    val out_valid = Output(Bool())
-    val next_pc = Output(UInt(32.W))
-    val dmem = Flipped(new RamIO)
+    val dmem = new RamIO
   })
 
- 
+  io.out := 0.U
 
-  // printf("pc=%x, mem_c=%x, addr=%x, stall=%x, rdata=%x, wmask=%x, wdata=%x, wen=%x\n", 
-  //         uop.pc, uop.mem_code, ls_addr, stall, io.dmem.rdata, io.dmem.wmask, io.dmem.wdata, io.dmem.wen)
+  // ADDI
+  when (io.opcode === 1.U) {
+    io.out := io.in1 + io.in2
+  }
+
+  io.dmem.en := false.B
+  io.dmem.addr := 0.U
+  io.dmem.wen := false.B
+  io.dmem.wdata := 0.U
+  io.dmem.wmask := 0.U
+
 }

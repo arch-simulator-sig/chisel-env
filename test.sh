@@ -36,10 +36,10 @@ while getopts 'crat:w:ls' OPT; do
     w)
       example="$OPTARG"
       ./build/emu -i ${cpu_tests_dir}${example}-cpu-tests.bin -b 0 --dump-wave --wave-path=./build/wave.vcd;;
-    l)
-      python3 script/lint.py;;
-    s)
-      python3 script/lint.py --soc;;
+    # l)
+    #   python3 script/lint.py;;
+    # s)
+    #   python3 script/lint.py --soc;;
     ?)
       echo "Error: unknown arguments"
   esac

@@ -103,7 +103,7 @@ endif
 
 SOFTFLOAT_REPO_PATH = resource/softfloat/repo
 ifeq ($(wildcard $(SOFTFLOAT_REPO_PATH)/COPYING.txt),)
-  $(shell git clone --depth=1 https://github.com/ucb-bar/berkeley-softfloat-3 $(SOFTFLOAT_REPO_PATH))
+  $(shell git clone --depth=1 https://gitee.com/dzw1208/berkeley-softfloat-3 $(SOFTFLOAT_REPO_PATH))
 endif
 SOFTFLOAT_BUILD_PATH = $(abspath $(SOFTFLOAT_REPO_PATH)/build/Linux-x86_64-GCC)
 
