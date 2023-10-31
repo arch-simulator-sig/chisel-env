@@ -17,7 +17,7 @@ class InstFetch extends Module {
   pc := pc + 4.U
 
   io.imem.en := true.B
-  io.imem.addr := pc.asUInt()
+  io.imem.addr := pc.asUInt
 
   io.pc := Mux(pc_en, pc, 0.U)
   io.inst := Mux(pc_en, io.imem.rdata(31, 0), 0.U)

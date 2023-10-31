@@ -1,5 +1,7 @@
 package nanshan
 
+import circt.stage._
+
 object TopMain extends App {
-  (new chisel3.stage.ChiselStage).execute(args, Seq(chisel3.stage.ChiselGeneratorAnnotation(() => new SimTop())))
+  (new ChiselStage).execute(args, Seq(chisel3.stage.ChiselGeneratorAnnotation(() => new SimTop)) :+ CIRCTTargetAnnotation(CIRCTTarget.Verilog))
 }

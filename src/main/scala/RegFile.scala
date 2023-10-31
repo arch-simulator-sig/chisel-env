@@ -28,6 +28,4 @@ class RegFile extends Module {
   dt_ar.io.clock  := clock
   dt_ar.io.coreid := 0.U
   dt_ar.io.gpr    := rf
-
-  BoringUtils.addSource(rf(10), "rf_a0")
 }
