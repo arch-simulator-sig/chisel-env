@@ -19,15 +19,15 @@ class Core extends Module {
   val rf = Module(new RegFile)
   rf.io.rs1_addr := decode.io.rs1_addr
   rf.io.rs2_addr := decode.io.rs2_addr
-  rf.io.rd_addr := decode.io.rd_addr
-  rf.io.rd_en := decode.io.rd_en
+  rf.io.rd_addr  := decode.io.rd_addr
+  rf.io.rd_en    := decode.io.rd_en
 
   val execution = Module(new Execution)
   execution.io.opcode := decode.io.opcode
-  execution.io.in1 := Mux(decode.io.rs1_en, rf.io.rs1_data, 0.U)
-  execution.io.in2 := Mux(decode.io.rs2_en, rf.io.rs2_data, decode.io.imm)
-  execution.io.dmem <> io.dmem
-  rf.io.rd_data := execution.io.out
+  execution.io.in1    := Mux(decode.io.rs1_en, rf.io.rs1_data, 0.U)
+  execution.io.in2    := Mux(decode.io.rs2_en, rf.io.rs2_data, decode.io.imm)
+  execution.io.dmem   <> io.dmem
+  rf.io.rd_data       := execution.io.out
 
   /* ----- Difftest ------------------------------ */
 
@@ -46,11 +46,11 @@ class Core extends Module {
   dt_ic.io.wdest    := decode.io.rd_addr
 
   val dt_ae = Module(new DifftestArchEvent)
-  dt_ae.io.clock        := clock
-  dt_ae.io.coreid       := 0.U
-  dt_ae.io.intrNO       := 0.U
-  dt_ae.io.cause        := 0.U
-  dt_ae.io.exceptionPC  := 0.U
+  dt_ae.io.clock       := clock
+  dt_ae.io.coreid      := 0.U
+  dt_ae.io.intrNO      := 0.U
+  dt_ae.io.cause       := 0.U
+  dt_ae.io.exceptionPC := 0.U
 
   val cycle_cnt = RegInit(0.U(64.W))
   val instr_cnt = RegInit(0.U(64.W))
@@ -59,7 +59,7 @@ class Core extends Module {
   instr_cnt := instr_cnt + 1.U
 
   val rf_a0 = WireInit(0.U(64.W))
-rf_a0 := BoringUtils.bore(rf.rf(10))
+  rf_a0 := BoringUtils.bore(rf.rf(10))
 
   val dt_te = Module(new DifftestTrapEvent)
   dt_te.io.clock    := clock
@@ -73,7 +73,7 @@ rf_a0 := BoringUtils.bore(rf.rf(10))
   val dt_cs = Module(new DifftestCSRState)
   dt_cs.io.clock          := clock
   dt_cs.io.coreid         := 0.U
-  dt_cs.io.priviledgeMode := 3.U  // Machine mode
+  dt_cs.io.priviledgeMode := 3.U // Machine mode
   dt_cs.io.mstatus        := 0.U
   dt_cs.io.sstatus        := 0.U
   dt_cs.io.mepc           := 0.U

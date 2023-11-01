@@ -10,14 +10,14 @@ class RegFile extends Module {
     val rs2_addr = Input(UInt(5.W))
     val rs1_data = Output(UInt(64.W))
     val rs2_data = Output(UInt(64.W))
-    val rd_addr = Input(UInt(5.W))
-    val rd_data = Input(UInt(64.W))
-    val rd_en = Input(Bool())
+    val rd_addr  = Input(UInt(5.W))
+    val rd_data  = Input(UInt(64.W))
+    val rd_en    = Input(Bool())
   })
 
   val rf = RegInit(VecInit(Seq.fill(32)(0.U(64.W))))
 
-  when (io.rd_en && (io.rd_addr =/= 0.U)) {
+  when(io.rd_en && (io.rd_addr =/= 0.U)) {
     rf(io.rd_addr) := io.rd_data;
   }
 

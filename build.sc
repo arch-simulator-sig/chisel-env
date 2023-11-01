@@ -8,7 +8,7 @@ import mill.bsp._
 
 object nanshan extends ScalaModule with ScalafmtModule { m =>
   override def millSourcePath = os.pwd
-  override def scalaVersion = "2.13.10"
+  override def scalaVersion   = "2.13.10"
   override def scalacOptions = Seq(
     "-language:reflectiveCalls",
     "-deprecation",
@@ -16,32 +16,32 @@ object nanshan extends ScalaModule with ScalafmtModule { m =>
     "-Xcheckinit"
   )
 
-def sources = T.sources {
-  super.sources() ++ Seq(PathRef(millSourcePath / "difftest"))
-}
+  def sources = T.sources {
+    super.sources() ++ Seq(PathRef(millSourcePath / "difftest"))
+  }
 
-def resources = T.sources {
-  super.resources() ++ Seq(
-    PathRef(millSourcePath / "src" / "main" / "resources")
+  def resources = T.sources {
+    super.resources() ++ Seq(
+      PathRef(millSourcePath / "src" / "main" / "resources")
+    )
+  }
+
+  override def ivyDeps = Agg(
+    ivy"org.chipsalliance::chisel:6.0.0-M3"
   )
-}
 
-override def ivyDeps = Agg(
-  ivy"org.chipsalliance::chisel:6.0.0-M3"
-)
-
-override def scalacPluginIvyDeps = Agg(
-  ivy"org.chipsalliance:::chisel-plugin:6.0.0-M3"
-)
-
-object test extends ScalaTests with Utest {
-  override def ivyDeps = m.ivyDeps() ++ Agg(
-    ivy"com.lihaoyi::utest:0.8.1",
-    ivy"edu.berkeley.cs::chiseltest:5.0.0"
+  override def scalacPluginIvyDeps = Agg(
+    ivy"org.chipsalliance:::chisel-plugin:6.0.0-M3"
   )
-}
 
-def repositoriesTask = T.task {
+  object test extends ScalaTests with Utest {
+    override def ivyDeps = m.ivyDeps() ++ Agg(
+      ivy"com.lihaoyi::utest:0.8.1",
+      ivy"edu.berkeley.cs::chiseltest:5.0.0"
+    )
+  }
+
+  def repositoriesTask = T.task {
     Seq(
       coursier.MavenRepository("https://maven.aliyun.com/repository/central"),
       coursier.MavenRepository(
