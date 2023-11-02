@@ -52,7 +52,7 @@ how to acclerate chisel , refer https://xiangshan-doc.readthedocs.io/zh-cn/lates
 
 1. Branch for dev: `dev/XxxYyy`. Example: `dev/ScalarPipeline`, `dev/Superscalar`.
 
-1. Only merge stable version (passing all tests) to `develop` branch after being permitted by Li Shi.
+1. Only merge stable version (passing all tests) to `develop` branch after being permitted by maintainer.
 
 1. Never push or merge to `master` branch directly. Make a pull request.
 
