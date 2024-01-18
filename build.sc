@@ -9,7 +9,7 @@ import mill.bsp._
 object nanshan extends ScalaModule with ScalafmtModule { m =>
   override def millSourcePath = os.pwd
   override def scalaVersion   = "2.13.10"
-  override def scalacOptions = Seq(
+  override def scalacOptions  = Seq(
     "-language:reflectiveCalls",
     "-deprecation",
     "-feature",
@@ -27,11 +27,11 @@ object nanshan extends ScalaModule with ScalafmtModule { m =>
   }
 
   override def ivyDeps = Agg(
-    ivy"org.chipsalliance::chisel:6.0.0-M3"
+    ivy"org.chipsalliance::chisel:6.0.0-RC2"
   )
 
   override def scalacPluginIvyDeps = Agg(
-    ivy"org.chipsalliance:::chisel-plugin:6.0.0-M3"
+    ivy"org.chipsalliance:::chisel-plugin:6.0.0-RC2"
   )
 
   object test extends ScalaTests with Utest {
