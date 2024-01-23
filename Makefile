@@ -30,4 +30,4 @@ help:
 clean:
 	-rm -rf $(BUILD_DIR)
 
-.PHONY: clean bsp idea help verilog emu
+.PHONY: clean init bump bsp idea help verilog emu
