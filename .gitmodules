@@ -3,7 +3,7 @@
 	url = git@github.com:arch-simulator-sig/difftest.git
 [submodule "DRAMsim3"]
 	path = DRAMsim3
-	url = https://gitee.com/dzw1208/DRAMsim3
+	url = git@github.com:OpenXiangShan/DRAMsim3.git
 [submodule "lib/rvdecoderdb"]
 	path = rvdecoderdb
 	url = git@github.com:sequencer/rvdecoderdb.git

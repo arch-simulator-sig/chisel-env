@@ -11,13 +11,12 @@ verilog:
 emu: verilog
 	cd $(NANSHAN_HOME)/difftest && $(MAKE)  EMU_TRACE=1  emu -j8  
 	
-# WITH_DRAMSIM3=1
+init:
+	git submodule update --init
 
-# emu-direct:
-# 	cd $(NANSHAN_HOME)/difftest && $(MAKE) WITH_DRAMSIM3=1 EMU_TRACE=1 emu -j
+bump:
+	git submodule foreach "git fetch origin&&git checkout master&&git reset --hard origin/master"
 
-# soc: sim-verilog
-# 	/bin/bash ./test.sh -s
 
 bsp:
 	mill -i mill.bsp.BSP/install
