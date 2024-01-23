@@ -10,3 +10,6 @@
 [submodule "espresso"]
 	path = espresso
 	url = git@github.com:classabbyamp/espresso-logic.git
+[submodule "lib/rvdecoderdb"]
+	path = rvdecoderdb
+	url = git@github.com:sequencer/rvdecoderdb.git

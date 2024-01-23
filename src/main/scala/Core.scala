@@ -58,7 +58,7 @@ class Core extends Module {
   cycle_cnt := cycle_cnt + 1.U
   instr_cnt := instr_cnt + 1.U
 
-  val rf_a0 = WireInit(0.U(64.W))
+  val rf_a0 = WireDefault(0.U(64.W))
   rf_a0 := BoringUtils.bore(rf.rf(10))
 
   val dt_te = Module(new DifftestTrapEvent)

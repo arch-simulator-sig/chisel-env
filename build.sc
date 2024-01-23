@@ -9,7 +9,7 @@ import mill.bsp._
 object nanshan extends ScalaModule with ScalafmtModule { m =>
   override def millSourcePath = os.pwd
   override def scalaVersion   = "2.13.12"
-  override def scalacOptions  = Seq(
+  override def scalacOptions = Seq(
     "-language:reflectiveCalls",
     "-deprecation",
     "-feature",
@@ -17,7 +17,10 @@ object nanshan extends ScalaModule with ScalafmtModule { m =>
   )
 
   def sources = T.sources {
-    super.sources() ++ Seq(PathRef(millSourcePath / "difftest"))
+    super.sources() ++ Seq(
+      PathRef(millSourcePath / "difftest"),
+      PathRef(millSourcePath / "rvdecoderdb" / "rvdecoderdb")
+    )
   }
 
   def resources = T.sources {
