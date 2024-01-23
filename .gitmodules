@@ -4,12 +4,9 @@
 [submodule "DRAMsim3"]
 	path = DRAMsim3
 	url = https://gitee.com/dzw1208/DRAMsim3
-[submodule "NEMU"] 
-	path = nemu
- 	url = https://gitee.com/dzw1208/NEMU-1.git
-[submodule "espresso"]
-	path = espresso
-	url = git@github.com:classabbyamp/espresso-logic.git
 [submodule "lib/rvdecoderdb"]
 	path = rvdecoderdb
 	url = git@github.com:sequencer/rvdecoderdb.git
+[submodule "nemu"]
+	path = nemu
+	url = git@github.com:arch-simulator-sig/NEMU.git
