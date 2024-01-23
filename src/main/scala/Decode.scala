@@ -42,6 +42,7 @@ object ImmType extends DecodeField[Insn, ImmTypeEnum.Type] {
         case "shamtw"                => ImmTypeEnum.immShamtW
         case _                       => ImmTypeEnum.immNone
       })
+      .filterNot(_ == ImmTypeEnum.immNone)
       .headOption // different ImmType will not appear in the Seq
       .getOrElse(ImmTypeEnum.immNone)
 
