@@ -30,11 +30,11 @@ object nanshan extends ScalaModule with ScalafmtModule { m =>
   }
 
   override def ivyDeps = Agg(
-    ivy"org.chipsalliance::chisel:6.0.0-RC2"
+    ivy"org.chipsalliance::chisel:6.0.0"
   )
 
   override def scalacPluginIvyDeps = Agg(
-    ivy"org.chipsalliance:::chisel-plugin:6.0.0-RC2"
+    ivy"org.chipsalliance:::chisel-plugin:6.0.0"
   )
 
   object test extends ScalaTests with Utest {
@@ -46,7 +46,7 @@ object nanshan extends ScalaModule with ScalafmtModule { m =>
 
   def repositoriesTask = T.task {
     Seq(
-      coursier.MavenRepository("https://maven.aliyun.com/repository/central"),
+      coursier.MavenRepository("http://mirrors.cloud.tencent.com/nexus/repository/maven-public"),
       coursier.MavenRepository(
         "https://repo.scala-sbt.org/scalasbt/maven-releases"
       )
