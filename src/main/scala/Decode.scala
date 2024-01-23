@@ -15,12 +15,13 @@ object Opcode extends DecodeField[Insn, UInt] {
   override def chiselType = UInt(8.W)
 
   override def genTable(i: Insn): BitPat = i.inst.name match {
-    case "add" => BitPat("b00000001")
+    case "add" => BitPat("b00000001") // or use ChiselEnum as well, this is just a demo
     case "sub" => BitPat("b00000010")
     case _     => BitPat("b00000000")
   }
 }
 
+//TODO: Use ChiselEnum1H after #2261 has been merged
 object ImmTypeEnum extends ChiselEnum {
   val immNone, immI, immS, immB, immU, immJ, immShamtD, immShamtW = Value
 }
@@ -46,6 +47,7 @@ object ImmType extends DecodeField[Insn, ImmTypeEnum.Type] {
       .headOption // different ImmType will not appear in the Seq
       .getOrElse(ImmTypeEnum.immNone)
 
+    // TODO: BitPat will accept ChiselEnum after #2327 has been merged
     BitPat(immType.litValue.U((immType.getWidth).W))
   }
 
@@ -104,6 +106,7 @@ class Decode extends Module {
   io.opcode := decodedBundle(Opcode)
 
   val imm_type = decodedBundle(ImmType)
+  // TODO: Use Mux1H after #2261 has been merged
   io.imm := MuxLookup(imm_type, 0.U)(
     Seq(
       ImmTypeEnum.immI      -> imm_i,
