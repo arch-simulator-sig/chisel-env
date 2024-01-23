@@ -13,7 +13,7 @@ emu: verilog
 	
 init:
 	git submodule update --init
-
+	cd rvdecoderdb && git submodule update --init
 bump:
 	git submodule foreach "git fetch origin&&git checkout master&&git reset --hard origin/master"
 
