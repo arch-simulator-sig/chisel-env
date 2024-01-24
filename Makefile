@@ -12,8 +12,7 @@ emu: verilog
 	cd $(NANSHAN_HOME)/difftest && $(MAKE)  EMU_TRACE=1  emu -j8  
 	
 init:
-	git submodule update --init
-	cd rvdecoderdb && git submodule update --init
+	git submodule update --init --recursive
 bump:
 	git submodule foreach "git fetch origin&&git checkout master&&git reset --hard origin/master"
 
