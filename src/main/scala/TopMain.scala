@@ -19,5 +19,4 @@ object TopMain extends App {
       FirtoolOption("-o=" + parseArgs("-td", args))
     )
   )
-
 }

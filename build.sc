@@ -37,6 +37,12 @@ object nanshan extends ScalaModule with ScalafmtModule { m =>
     ivy"org.chipsalliance:::chisel-plugin:7.0.0-M1"
   )
 
+  object test extends ScalaTests with TestModule.ScalaTest {
+    override def ivyDeps = m.ivyDeps() ++ Agg(
+      ivy"org.scalatest::scalatest::3.2.16"
+    )
+  }
+
   def repositoriesTask = T.task {
     Seq(
       coursier.MavenRepository("http://mirrors.cloud.tencent.com/nexus/repository/maven-public"),
