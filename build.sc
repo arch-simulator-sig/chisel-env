@@ -30,19 +30,12 @@ object nanshan extends ScalaModule with ScalafmtModule { m =>
   }
 
   override def ivyDeps = Agg(
-    ivy"org.chipsalliance::chisel:6.0.0"
+    ivy"org.chipsalliance::chisel:7.0.0-M1"
   )
 
   override def scalacPluginIvyDeps = Agg(
-    ivy"org.chipsalliance:::chisel-plugin:6.0.0"
+    ivy"org.chipsalliance:::chisel-plugin:7.0.0-M1"
   )
-
-  object test extends ScalaTests with Utest {
-    override def ivyDeps = m.ivyDeps() ++ Agg(
-      ivy"com.lihaoyi::utest:0.8.1",
-      ivy"edu.berkeley.cs::chiseltest:5.0.0"
-    )
-  }
 
   def repositoriesTask = T.task {
     Seq(
