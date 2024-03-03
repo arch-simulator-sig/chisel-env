@@ -1,6 +1,7 @@
 package nanshan
 
-import circt.stage._
+import chisel3._
+import circt.stage.{CIRCTTarget, CIRCTTargetAnnotation, FirtoolOption}
 
 object TopMain extends App {
   def parseArgs(info: String, args: Array[String]): String = {
@@ -10,10 +11,13 @@ object TopMain extends App {
     target.substring(info.length() + 1)
   }
 
-  (new ChiselStage).execute(
+  chisel3.emitVerilog(
+    new SimTop,
     args,
-    Seq(chisel3.stage.ChiselGeneratorAnnotation(() => new SimTop)) :+ CIRCTTargetAnnotation(
-      CIRCTTarget.Verilog
-    ) :+ FirtoolOption("--split-verilog") :+ FirtoolOption("-o=" + parseArgs("-td", args))
+    Seq(
+      FirtoolOption("--split-verilog"),
+      FirtoolOption("-o=" + parseArgs("-td", args))
+    )
   )
+
 }
