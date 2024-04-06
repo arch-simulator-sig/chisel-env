@@ -5,8 +5,8 @@ default: verilog
 
 verilog:
 	mkdir -p $(BUILD_DIR)
-	mill -i nanshan.runMain nanshan.TopMain -td=$(BUILD_DIR)
-	find $(BUILD_DIR) -name "*.v" -o -name "*.sv" | xargs cat > $(BUILD_DIR)/SimTop.v
+	rm $(BUILD_DIR)/* -r
+	mill -i nanshan.runMain nanshan.Elaborate --target-dir $(BUILD_DIR)
 
 emu: verilog
 	cd $(NANSHAN_HOME)/difftest && $(MAKE)  EMU_TRACE=1  emu -j8  
@@ -24,7 +24,7 @@ idea:
 	mill -i mill.scalalib.GenIdea/idea
 
 help:
-	mill -i nanshan.runMain nanshan.TopMain --help
+	mill -i nanshan.runMain nanshan.Elaborate --help
 
 clean:
 	-rm -rf $(BUILD_DIR)
