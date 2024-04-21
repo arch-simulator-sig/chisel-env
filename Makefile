@@ -5,7 +5,7 @@ default: verilog
 
 verilog:
 	mkdir -p $(BUILD_DIR)
-	rm $(BUILD_DIR)/* -r
+	-rm $(BUILD_DIR)/* -r
 	mill -i nanshan.runMain nanshan.Elaborate --target-dir $(BUILD_DIR)
 
 emu: verilog
