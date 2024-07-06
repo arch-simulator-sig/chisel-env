@@ -8,6 +8,9 @@ verilog:
 	-rm $(BUILD_DIR)/* -r
 	mill -i nanshan.runMain nanshan.Elaborate --target-dir $(BUILD_DIR)
 
+test:
+	mill -i __.test
+
 emu: verilog
 	cd $(NANSHAN_HOME)/difftest && $(MAKE)  EMU_TRACE=1  emu -j8  
 	
