@@ -22,12 +22,14 @@ object nanshan extends ScalaModule with ScalafmtModule { m =>
     )
   }
 
+  val chiselVersion = "6.5.0"
+
   override def ivyDeps = Agg(
-    ivy"org.chipsalliance::chisel:6.4.0"
+    ivy"org.chipsalliance::chisel:$chiselVersion"
   )
 
   override def scalacPluginIvyDeps = Agg(
-    ivy"org.chipsalliance:::chisel-plugin:6.4.0"
+    ivy"org.chipsalliance:::chisel-plugin:$chiselVersion"
   )
 
   object test extends ScalaTests with TestModule.ScalaTest {
