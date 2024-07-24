@@ -9,6 +9,12 @@ case class Insn(val inst: rvdecoderdb.Instruction) extends DecodePattern {
   override def bitPat: BitPat = BitPat("b" + inst.encoding.toString())
 }
 
+object Insn {
+  implicit class addMethodsToInsn(i: Insn) {
+    def hasArg(arg: String) = i.inst.args.map(_.name).contains(arg)
+  }
+}
+
 object Opcode extends DecodeField[Insn, UInt] {
   override def name = "opcode"
 
@@ -56,19 +62,19 @@ object ImmType extends DecodeField[Insn, ImmTypeEnum.Type] {
 object Rs1En extends BoolDecodeField[Insn] {
   override def name: String = "rs1_en"
 
-  override def genTable(i: Insn): BitPat = if (i.inst.args.map(_.name).contains("rs1")) y else n
+  override def genTable(i: Insn): BitPat = if (i.hasArg("rs1")) y else n
 }
 
 object Rs2En extends BoolDecodeField[Insn] {
   override def name: String = "rs2_en"
 
-  override def genTable(i: Insn): BitPat = if (i.inst.args.map(_.name).contains("rs2")) y else n
+  override def genTable(i: Insn): BitPat = if (i.hasArg("rs2")) y else n
 }
 
 object RdEn extends BoolDecodeField[Insn] {
   override def name: String = "rd_en"
 
-  override def genTable(i: Insn): BitPat = if (i.inst.args.map(_.name).contains("rd")) y else n
+  override def genTable(i: Insn): BitPat = if (i.hasArg("rd")) y else n
 }
 class Decode extends Module {
   val io = IO(new Bundle {
