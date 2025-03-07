@@ -1,0 +1,87 @@
+// import Mill dependency
+import mill._
+import mill.scalalib._
+import mill.scalalib.scalafmt.ScalafmtModule
+import os.Path
+
+object v extends Module {
+  val scalaVersion    = "2.13.15"
+  val chiselVersion   = "6.6.0"
+  val chiselIvy       = ivy"org.chipsalliance::chisel:$chiselVersion"
+  val chiselPluginIvy = ivy"org.chipsalliance:::chisel-plugin:$chiselVersion"
+  val scalaTestIvy    = ivy"org.scalatest::scalatest::3.2.19"
+  val osLibIvy        = ivy"com.lihaoyi::os-lib:0.9.1"
+  val upickleIvy      = ivy"com.lihaoyi::upickle:3.3.1"
+}
+
+object rvdecoderdb extends ScalaModule {
+  override def scalaVersion = v.scalaVersion
+
+  // millSourcePath is determined by the hierarchy of the project
+  // e.g. rvdecoderdb is a Mill's default folder layout project,
+  // so we can use ScalaModule to define the project.
+  // if the project is located at /home/user/chisel-env, then
+  // millSourcePath is /home/user/chisel-env/rvdecoderdb,
+  // but sources are located at /home/user/chisel-env/rvdecoderdb/rvdecoderdb
+  // so we need to append /rvdecoderdb to the path
+  override def millSourcePath: Path = super.millSourcePath / "rvdecoderdb"
+
+  def osLibIvy         = v.osLibIvy
+  def upickleIvy       = v.upickleIvy
+
+  override def ivyDeps = Agg(v.chiselIvy, osLibIvy, upickleIvy)
+
+  override def sources = Task.Sources {
+    super.sources() ++ Seq(PathRef(millSourcePath / "jvm" / "src"))
+  }
+}
+
+object difftest extends SbtModule {
+  // millSourcePath is determined by the hierarchy of the project,
+  // we can see that the sources are located at /home/user/chisel-env/difftest/src/main/scala
+  // so difftest is an SBT layout project, and we need to use SbtModule to define this project,
+  // but there is no need to override millSourcePath (mill will find the correct path by itself)
+  // see: https://mill-build.org/mill/scalalib/intro.html#_sbt_compatible_modules for more information
+  override def scalaVersion: T[String] = v.scalaVersion
+  override def ivyDeps             = Agg(v.chiselIvy)
+  override def scalacPluginIvyDeps = Agg(v.chiselPluginIvy)
+}
+
+object nanshan extends ScalaModule with ScalafmtModule {
+
+  // We need to define these for importing rvdecoderdb and difftest
+  def rvdecoderdbModule: ScalaModule = rvdecoderdb
+
+  def difftestModule: ScalaModule = difftest
+
+  override def moduleDeps = super.moduleDeps ++ Seq(rvdecoderdbModule, difftestModule)
+
+  override def scalaVersion = v.scalaVersion
+
+  override def scalacOptions = Seq(
+    "-language:reflectiveCalls",
+    "-deprecation",
+    "-feature",
+    "-Xcheckinit"
+  )
+
+  // Define these for importing chisel
+  override def ivyDeps = Agg(v.chiselIvy)
+
+  // The Chisel compiler plugin is required for compiling Chisel code
+  override def scalacPluginIvyDeps = Agg(v.chiselPluginIvy)
+
+  object test extends ScalaTests with TestModule.ScalaTest {
+    override def ivyDeps = super.ivyDeps() ++ Agg(v.scalaTestIvy)
+  }
+
+  // Use maven mirror for faster download
+  def repositoriesTask = Task.Anon {
+    Seq(
+      coursier.MavenRepository("http://mirrors.cloud.tencent.com/nexus/repository/maven-public"),
+      coursier.MavenRepository(
+        "https://repo.scala-sbt.org/scalasbt/maven-releases"
+      )
+    ) ++ super.repositoriesTask()
+  }
+}
